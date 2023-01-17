@@ -1,0 +1,8 @@
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: kapp-git-ssh
+  namespace: tap-namespace-provisioning
+spec:
+  fromNamespace: tap-install
