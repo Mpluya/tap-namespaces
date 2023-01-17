@@ -2,11 +2,9 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default #! use value from "Install Default Supply Chain"
-  namespace: #@ user.namespace
 secrets:
   - name: registry-credentials
-  - name: cosign
-  - name: gitops-ssh
+  - name: git-ssh
 imagePullSecrets:
   - name: tap-registry
   - name: registry-credentials
