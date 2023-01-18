@@ -15,7 +15,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: #@ name[0]
+  name: #@ name
   labels:
     apps.tanzu.vmware.com/tap-ns: ""
 #@ end
@@ -23,7 +23,7 @@ metadata:
 ---
 
 #@ for val in namespaces():
---- #@ namespace(val)
+--- #@ namespace(val[0])
 #@ end
 
 ---
