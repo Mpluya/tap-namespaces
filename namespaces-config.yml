@@ -4,10 +4,10 @@
 ---
 
 #@ def namespaces():
-- [justin", "angular"]
-- ["mae", "python"]
-- ["aiden", "angular"]
-- ["travis", "python"]
+- justin
+- mae
+- aiden
+- travis
 #@ end
 
 ---
@@ -23,15 +23,14 @@ metadata:
 ---
 
 #@ for val in namespaces():
---- #@ namespace(val[0])
+--- #@ namespace(val)
 #@ end
 
 ---
 #@ def config():
 namespaces:
 #@ for val in namespaces():
-- name: #@ val[0]
-- language: #@ val[1]
+- name: #@ val
 #@ end
 #@ end
 ---
