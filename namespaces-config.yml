@@ -4,9 +4,9 @@
 ---
 
 #@ def namespaces():
-- justin
-- mae
-- aiden
+- [justin", "angular"]
+- ["mae", "python"]
+- ["aiden", "angular"]
 #@ end
 
 ---
@@ -14,7 +14,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: #@ name
+  name: #@ name[0]
   labels:
     apps.tanzu.vmware.com/tap-ns: ""
 #@ end
@@ -29,7 +29,8 @@ metadata:
 #@ def config():
 namespaces:
 #@ for val in namespaces():
-- name: #@ val
+- name: #@ val[0]
+- language: #@ val[1]
 #@ end
 #@ end
 ---
