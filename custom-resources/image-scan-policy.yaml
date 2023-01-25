@@ -1,0 +1,91 @@
+apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
+kind: ScanPolicy
+metadata:
+  name: image-scan-policy
+  namespace: mae
+  labels:
+    app.kubernetes.io/part-of: scan-system #! This label is required to have policy visible in tap-gui, but the value can be anything
+spec:
+  regoFile: |
+    package main
+
+    # Accepted Values: "Critical", "High", "Medium", "Low", "Negligible", "UnknownSeverity"
+    notAllowedSeverities := ["Critical","High","UnknownSeverity"]
+    
+    # List of acceptable risks.  Must specify the rationale, subjective risk level, and expiration date.  Example:
+    # {
+    #   "cve": "GHSA-36p3-wjmg-h94x",
+    #   "rationale": "CVE is for spring-boot versions < 2.6.6.  We are running 2.7.3.  However grype scanner can not read derived versions from POM files, so it can't determine the package version and is reporting vulnerable.  This is limitation of grype with java POM."
+    # }
+    falsePositiveCves := [
+    ]
+
+    # List of acceptable risks.  Must specify the rationale, subjective risk level, and expiration date.  Example:
+    # {
+    #   "cve": "CVE-2016-1000027",
+    #   "rationale": "The hello application source has been reviewed and code paths analyzed.  Spring team does not intend to change this and disputes its rating.  Security team has agreed to ignore. https://nvd.nist.gov/vuln/detail/CVE-2016-1000027",
+    #   "subjectiveRiskLevel": "Low",
+    #   "expiration": "2022-Dec-31"
+    # }
+    acceptableRiskCves := [
+      {
+        "cve": "CVE-2021-43877",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
+        "subjectiveRiskLevel": "Low",
+        "expiration": "2022-Dec-31"
+      },
+      {
+        "cve": "GHSA-rxg9-xrhp-64gj",
+        "rationale": "I can't for the life of me figure out where this System.Drawing.Common depenency is coming in.  Since this is a demo app, I will temporarily allow.",
+        "subjectiveRiskLevel": "Medium",
+        "expiration": "2022-Dec-31"
+      }
+    ]
+
+    contains(arr1, elem) = true {
+      arr1[_] = elem
+    } else = false { true }
+
+    foundInFalsePositiveList(arr2, elem) = true {
+      arr2[_].cve = elem
+    } else = false { true }
+
+    foundInAcceptableRiskList(array, elem) = true {
+      array[_].cve = elem
+      curr_time := time.now_ns()
+      date_format := "2006-Jan-02"
+      expire_time := time.parse_ns(date_format, array[_].expiration)
+      curr_time < expire_time
+    } else = false { true }
+
+    # Custom Acceptable Risk Rule.  Report safe if found in acceptabile risk list and accepted risk is not expired
+    isSafe(match) {
+      ignore := foundInAcceptableRiskList(acceptableRiskCves, match.id)
+      ignore
+    }
+
+    # Custom False Positive rule.  Report safe if found in false positive list
+    isSafe(match) {
+      ignore := foundInFalsePositiveList(falsePositiveCves, match.id)
+      ignore
+    }
+
+    # OOTB Safe if severity is in severity allow list
+    isSafe(match) {
+      severities := { e | e := match.ratings.rating.severity } | { e | e := match.ratings.rating[_].severity }
+      some i
+      fails := contains(notAllowedSeverities, severities[i])
+      not fails
+    }
+
+    deny[msg] {
+      comps := { e | e := input.bom.components.component } | { e | e := input.bom.components.component[_] }
+      some i
+      comp := comps[i]
+      vulns := { e | e := comp.vulnerabilities.vulnerability } | { e | e := comp.vulnerabilities.vulnerability[_] }
+      some j
+      vuln := vulns[j]
+      ratings := { e | e := vuln.ratings.rating.severity } | { e | e := vuln.ratings.rating[_].severity }
+      not isSafe(vuln)
+      msg = sprintf("CVE %s %s %s", [comp.name, vuln.id, ratings])
+    }
