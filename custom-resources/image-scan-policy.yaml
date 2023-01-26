@@ -31,15 +31,33 @@ spec:
       {
         "cve": "CVE-2021-43877",
         "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
-        "subjectiveRiskLevel": "Low",
-        "expiration": "2022-Dec-31"
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Dec-31"
       },
       {
-        "cve": "GHSA-rxg9-xrhp-64gj",
-        "rationale": "I can't for the life of me figure out where this System.Drawing.Common depenency is coming in.  Since this is a demo app, I will temporarily allow.",
-        "subjectiveRiskLevel": "Medium",
-        "expiration": "2022-Dec-31"
-      }
+        "cve": "GHSA-8f7f-vqg5-jrv9",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Dec-31"
+      },
+      {
+        "cve": "GHSA-7jgj-8wvc-jh57",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Dec-31"
+      },
+      {
+        "cve": "GHSA-5f2m-466j-3848",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Dec-31"
+      },
+      {
+        "cve": "GHSA-xhfc-gr8f-ffwc",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Dec-31"
+      },
     ]
 
     contains(arr1, elem) = true {
