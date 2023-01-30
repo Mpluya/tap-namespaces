@@ -10,7 +10,7 @@ spec:
     package main
 
     # Accepted Values: "Critical", "High", "Medium", "Low", "Negligible", "UnknownSeverity"
-    notAllowedSeverities := ["UnknownSeverity"]
+    notAllowedSeverities := ["Critical","High","UnknownSeverity"]
     
     # List of acceptable risks.  Must specify the rationale, subjective risk level, and expiration date.  Example:
     # {
