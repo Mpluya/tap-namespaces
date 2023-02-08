@@ -47,6 +47,8 @@ spec:
       image: mcr.microsoft.com/dotnet/sdk:6.0
       workingDir: $(workspaces.supplychain-workspace.path)
       script: |
+        apt-get update
+        apt-get install --yes openjdk-11-jre
         dotnet tool install --global dotnet-sonarscanner
         export PATH="$PATH:/root/.dotnet/tools"
         dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token)
