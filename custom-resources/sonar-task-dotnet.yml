@@ -94,16 +94,6 @@ spec:
       image: sonarsource/sonar-scanner-cli:latest
       workingDir: $(workspaces.supplychain-workspace.path)
       script: |
-        #!/usr/bin/env bash
-        set -ex
-        SUB_PATH=$(params.source-sub-path)
-        if [ -z ${SUB_PATH:-""} ]; then
-          echo "INFO: No subpath provided."
-        else
-          echo "INFO: Changing directory to $SUB_PATH"
-          cd $SUB_PATH
-        fi
-
         dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.login=$(params.sonar-login)
         dotnet build *.sln
         dotnet sonarscanner end /d:sonar.login=$(params.sonar-login)
