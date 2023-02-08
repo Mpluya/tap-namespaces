@@ -43,53 +43,6 @@ spec:
         set -ex
         wget -qO- $(params.source-url) | tar xvz
 
-    - name: sonar-properties-create
-      image: gradle
-      workingDir: $(workspaces.supplychain-workspace.path)
-      script: |
-        #!/usr/bin/env bash
-        replaceValues() {
-          filename=$1
-          thekey=$2
-          newvalue=$3
-          if ! grep -R "^[#]*\s*${thekey}=.*" $filename >/dev/null; then
-            echo "APPENDING because '${thekey}' not found"
-            echo "" >>$filename
-            echo "$thekey=$newvalue" >>$filename
-          else
-            echo "SETTING because '${thekey}' found already"
-            sed -ir "s|^[#]*\s*${thekey}=.*|$thekey=$newvalue|" $filename
-          fi
-        }
-
-        # If we were given a properties file, then use that.
-        if [[ -f $(workspaces.supplychain-workspace.path)/sonar-project.properties ]]; then
-          echo "using user provided sonar-project.properties file"
-          cp -RL $(workspaces.supplychain-workspace.path)/sonar-project.properties $(workspaces.supplychain-workspace.path)/sonar-project.properties
-        fi
-        if [[ -f $(workspaces.supplychain-workspace.path)/sonar-project.properties ]]; then
-
-          # Allow overrides from parameters passed in from the supply chain.
-          if [[ -n "$(params.sonar-host-url)" ]]; then
-            replaceValues $(workspaces.supplychain-workspace.path)/sonar-project.properties sonar.host.url $(params.sonar-host-url)
-          fi
-          if [[ -n "$(params.sonar-project-key)" ]]; then
-            replaceValues $(workspaces.supplychain-workspace.path)/sonar-project.properties sonar.projectKey $(params.sonar-project-key)
-          fi
-          if [[ -n "$(params.sonar-token)" ]]; then
-            replaceValues $(workspaces.supplychain-workspace.path)/sonar-project.properties sonar.login $(params.sonar-token)
-          fi
-        else
-          touch sonar-project.properties
-          echo "sonar.projectKey=$(params.sonar-project-key)" >> sonar-project.properties
-          echo "sonar.host.url=$(params.sonar-host-url)" >> sonar-project.properties
-          echo "sonar.login=$(params.sonar-token)" >> sonar-project.properties
-          echo "sonar.sources=." >> sonar-project.properties
-        fi
-        echo "---------------------------"
-        cat $(workspaces.supplychain-workspace.path)/sonar-project.properties
-
-
     - name: sonar-scan
       image: mcr.microsoft.com/dotnet/sdk:6.0
       workingDir: $(workspaces.supplychain-workspace.path)
