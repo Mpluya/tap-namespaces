@@ -28,6 +28,8 @@ spec:
       default: ""
     - name: wait-on-sonar-analysis
       description: toggle to wait until sonarqube analysis is complete
+    - name: source-sub-path
+      value: $(params.source-sub-path)
 
   workspaces:
     - name: supplychain-workspace
@@ -47,6 +49,13 @@ spec:
       script: |
         #!/usr/bin/env bash
         set -ex
+        SUB_PATH=$(params.source-sub-path)
+        if [ -z ${SUB_PATH:-""} ]; then
+          echo "INFO: No subpath provided."
+        else
+          echo "INFO: Changing directory to $SUB_PATH"
+          cd $SUB_PATH
+        fi
         dotnet-sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-login)
         dotnet build *.sln
         dotnet-sonarscanner end /d:sonar.login=$(params.sonar-login)
