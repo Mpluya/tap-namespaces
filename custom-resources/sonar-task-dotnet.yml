@@ -51,6 +51,6 @@ spec:
         apt-get install --yes openjdk-11-jre
         dotnet tool install --global dotnet-sonarscanner
         export PATH="$PATH:/root/.dotnet/tools"
-        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=$(wait-on-sonar-analysis)
+        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis)
         dotnet build *.sln
         dotnet sonarscanner end /d:sonar.login=$(params.sonar-token)
