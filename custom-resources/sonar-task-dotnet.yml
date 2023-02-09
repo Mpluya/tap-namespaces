@@ -67,9 +67,9 @@ spec:
         fi
 
         echo "whats in my supply chain working dir/.sonarqube ******"
-        ls -al $(workspaces.supplychain-workspace.path)/.sonarqube
+        ls -al $(workspaces.supplychain-workspace.path)/.sonarqube/out
 
-        metadataFile=$(workspaces.supplychain-workspace.path)/.scannerwork/report-task.txt
+        metadataFile=$(workspaces.supplychain-workspace.path)/.sonarqube/out/report-task.txt
         sonarPropsFile=$(workspaces.supplychain-workspace.path)/sonar-project.properties
         if [[ ! -f "$metadataFile" ]]; then
           echo "$metadataFile does not exist."
