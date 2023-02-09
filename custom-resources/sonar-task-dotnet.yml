@@ -51,7 +51,7 @@ spec:
         apt-get install --yes openjdk-11-jre
         dotnet tool install --global dotnet-sonarscanner
         export PATH="$PATH:/root/.dotnet/tools"
-        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token)
+        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=true
         dotnet build *.sln
         dotnet sonarscanner end /d:sonar.login=$(params.sonar-token)
 
@@ -67,9 +67,9 @@ spec:
         fi
 
         echo "whats in my supply chain working dir/.sonarqube ******"
-        ls -al $(workspaces.supplychain-workspace.path)/.sonarqube/out
+        ls -al $(workspaces.supplychain-workspace.path)/.sonarqube/out/.sonar
 
-        metadataFile=$(workspaces.supplychain-workspace.path)/.sonarqube/out/report-task.txt
+        metadataFile=$(workspaces.supplychain-workspace.path)/.sonarqube/out/.sonar/report-task.txt
         sonarPropsFile=$(workspaces.supplychain-workspace.path)/sonar-project.properties
         if [[ ! -f "$metadataFile" ]]; then
           echo "$metadataFile does not exist."
