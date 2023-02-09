@@ -66,8 +66,8 @@ spec:
           exit 0
         fi
 
-        echo "whats in .scannerwork????"
-        ls -al $(workspaces.supplychain-workspace.path)/.scannerwork
+        echo "whats in my supply chain working dir******"
+        ls -al $(workspaces.supplychain-workspace.path)
 
         metadataFile=$(workspaces.supplychain-workspace.path)/.scannerwork/report-task.txt
         sonarPropsFile=$(workspaces.supplychain-workspace.path)/sonar-project.properties
