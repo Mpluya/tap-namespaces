@@ -66,6 +66,9 @@ spec:
           exit 0
         fi
 
+        echo "whats in .scannerwork????"
+        ls -al $(workspaces.supplychain-workspace.path)/.scannerwork
+
         metadataFile=$(workspaces.supplychain-workspace.path)/.scannerwork/report-task.txt
         sonarPropsFile=$(workspaces.supplychain-workspace.path)/sonar-project.properties
         if [[ ! -f "$metadataFile" ]]; then
