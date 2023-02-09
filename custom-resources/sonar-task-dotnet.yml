@@ -50,7 +50,13 @@ spec:
         apt-get update
         apt-get install --yes openjdk-11-jre
         dotnet tool install --global dotnet-sonarscanner
+        dotnet tool install --global coverlet.console
         export PATH="$PATH:/root/.dotnet/tools"
-        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis)
-        dotnet build *.sln
+        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis) /d:sonar.cs.opencover.reportsPaths=coverage.xml
+        dotnet build *.sln --no-incremental
+        coverlet .\CovExample.Tests\bin\Debug\net6.0\CovExample.Tests.dll
+          --target "dotnet" 
+          --targetargs "test --no-build"
+          -f=opencover 
+          -o="coverage.xml"
         dotnet sonarscanner end /d:sonar.login=$(params.sonar-token)
