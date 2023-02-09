@@ -51,66 +51,6 @@ spec:
         apt-get install --yes openjdk-11-jre
         dotnet tool install --global dotnet-sonarscanner
         export PATH="$PATH:/root/.dotnet/tools"
-        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=true
+        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=$(wait-on-sonar-analysis)
         dotnet build *.sln
         dotnet sonarscanner end /d:sonar.login=$(params.sonar-token)
-
-
-    - name: quality-gate
-      image: 375783000519.dkr.ecr.us-west-2.amazonaws.com/tanzu-application-platform/alpine-curl-jq
-      workingDir: $(workspaces.supplychain-workspace.path)
-      script: |
-        #!/usr/bin/env bash
-        if [ -z "$(params.wait-on-sonar-analysis)" ] || [ "$(params.wait-on-sonar-analysis)" == "false" ]; then
-          echo "not waiting for analysis to finish"
-          exit 0
-        fi
-
-        echo "whats in my supply chain working dir/.sonarqube ******"
-        ls -al $(workspaces.supplychain-workspace.path)/.sonarqube/out/.sonar
-
-        metadataFile=$(workspaces.supplychain-workspace.path)/.sonarqube/out/.sonar/report-task.txt
-        sonarPropsFile=$(workspaces.supplychain-workspace.path)/sonar-project.properties
-        if [[ ! -f "$metadataFile" ]]; then
-          echo "$metadataFile does not exist."
-          exit 1
-        fi
-
-        cat $metadataFile
-        serverUrl="$(sed -n 's/serverUrl=\(.*\)/\1/p' "${metadataFile}")"
-        ceTaskUrl="$(sed -n 's/ceTaskUrl=\(.*\)/\1/p' "${metadataFile}")"
-        sonarToken="$(sed -n 's/sonar.login=\(.*\)/\1/p' "${sonarPropsFile}")"
-
-        if [ -z "${serverUrl}" ] || [ -z "${ceTaskUrl}" ]; then
-          echo "Invalid report metadata file."
-          exit 1
-        fi
-
-        task="$(curl --silent --fail --show-error --user "${sonarToken}": "${ceTaskUrl}")"
-        status="$(jq -r '.task.status' <<< "$task")"
-
-        until [[ ${status} != "PENDING" && ${status} != "IN_PROGRESS" ]]; do
-          printf '.'
-          sleep 5s
-          task="$(curl --silent --fail --show-error --user "${sonarToken}": "${ceTaskUrl}")"
-          status="$(jq -r '.task.status' <<< "$task")"
-        done
-
-        analysisId="$(jq -r '.task.analysisId' <<< "${task}")"
-        echo "analysisId: " $analysisId
-        
-        qualityGateUrl="${serverUrl}/api/qualitygates/project_status?analysisId=${analysisId}"
-        
-        qualityGateStatus="$(curl --silent --fail --show-error --user "${sonarToken}": "${qualityGateUrl}" | jq -r '.projectStatus.status')"
-
-        if [[ ${qualityGateStatus} == "OK" ]]; then
-          echo "quality-gate-status::PASSED"
-        elif [[ ${qualityGateStatus} == "WARN" ]]; then
-          echo "quality-gate-status::WARN"
-        elif [[ ${qualityGateStatus} == "ERROR" ]]; then
-          echo "quality-gate-status::FAILED"
-          exit 1
-        else
-          echo "quality-gate-status::FAILED"
-          exit 1
-        fi
