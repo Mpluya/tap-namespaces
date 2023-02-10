@@ -45,4 +45,4 @@ spec:
                 cd $SUB_PATH
               fi
 
-              dotnet test
+              dotnet test *.sln
