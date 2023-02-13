@@ -18,9 +18,6 @@ spec:
     - name: sonar-project-key
       description: Project's unique key
       default: ""
-    - name: sonar-token
-      description: Auth for the project
-      default: ""
     - name: source-url
       description: Location of the source code
     - name: source-revision
@@ -30,7 +27,10 @@ spec:
       description: toggle to wait until sonarqube analysis is complete
     - name: source-sub-path
       default: ""
-
+    - name: sonar-token-secret
+      type: string
+      description: name of the secret holding the sonar-token
+      default: sonar-token
   workspaces:
     - name: supplychain-workspace
 
@@ -46,13 +46,19 @@ spec:
     - name: sonar-scan
       image: mcr.microsoft.com/dotnet/sdk:6.0
       workingDir: $(workspaces.supplychain-workspace.path)
+      env:
+      - name: SONAR_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: $(params.sonar-token-secret)
+          key: bot-token
       script: |
         apt-get update
         apt-get install --yes openjdk-11-jre
         dotnet tool install --global dotnet-sonarscanner
         dotnet tool install --global dotnet-coverage
         export PATH="$PATH:/root/.dotnet/tools"
-        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-token) /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis) /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+        dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=${SONAR_TOKEN} /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis) /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
         dotnet build *.sln --no-incremental
         dotnet-coverage collect 'dotnet test *.sln' -f xml  -o 'coverage.xml'
-        dotnet sonarscanner end /d:sonar.login=$(params.sonar-token)
+        dotnet sonarscanner end /d:sonar.login=${SONAR_TOKEN}
