@@ -48,10 +48,10 @@ spec:
       workingDir: $(workspaces.supplychain-workspace.path)
       env:
       - name: SONAR_TOKEN
-      valueFrom:
-        secretKeyRef:
-          name: $(params.sonar-token-secret)
-          key: bot-token
+        valueFrom:
+          secretKeyRef:
+            name: $(params.sonar-token-secret)
+            key: bot-token
       script: |
         apt-get update
         apt-get install --yes openjdk-11-jre
