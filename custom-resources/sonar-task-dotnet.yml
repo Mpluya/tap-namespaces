@@ -3,7 +3,7 @@ kind: Task
 metadata:
   name: sonarqube-scanner-dotnet
   labels:
-    apps.tanzu.vmware.com/sonarqube: "sonarqube"
+    apps.tanzu.vmware.com/pipeline: test-dotnet
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/categories: Security
