@@ -8,7 +8,7 @@ kind: Pipeline
 metadata:
   name: developer-defined-tekton-pipeline-dotnet
   labels:
-    apps.tanzu.vmware.com/pipeline: test-dotnet     #! (!) required
+    apps.tanzu.vmware.com/pipeline: test-dotnet    #! (!) required
 spec:
   params:
     - name: source-url                       #! (!) required
@@ -46,3 +46,17 @@ spec:
               fi
 
               dotnet test *.sln
+            volumeMounts:
+              - mountPath: /var/run/
+                name: dind-socket
+        sidecars:
+          - image: docker:20.10.17-dind
+            name: docker
+            securityContext:
+              privileged: true
+            volumeMounts:
+              - mountPath: /var/run/
+                name: dind-socket
+        volumes:
+          - name: dind-socket
+            emptyDir: { }
