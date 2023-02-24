@@ -58,6 +58,15 @@ spec:
         dotnet tool install --global dotnet-sonarscanner
         dotnet tool install --global coverlet.console
         export PATH="$PATH:/root/.dotnet/tools"
+
+        SUB_PATH=$(params.source-sub-path)
+        if [ -z ${SUB_PATH:-""} ]; then
+          echo "INFO: No subpath provided."
+        else
+          echo "INFO: Changing directory to $SUB_PATH"
+          cd $SUB_PATH
+        fi
+        
         dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=${SONAR_TOKEN} /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis) /d:sonar.cs.opencover.reportsPaths=coverage.xml /d:sonar.coverage.exclusions="**Tests*.cs"
         dotnet build *.sln --no-incremental
         dotnet test *.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover 
