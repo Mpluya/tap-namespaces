@@ -60,5 +60,5 @@ spec:
         export PATH="$PATH:/root/.dotnet/tools"
         dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=${SONAR_TOKEN} /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis) /d:sonar.cs.opencover.reportsPaths=coverage.xml /d:sonar.coverage.exclusions="**Tests*.cs"
         dotnet build *.sln --no-incremental
-        dotnet test *.sln /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura 
+        dotnet test *.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover 
         dotnet sonarscanner end /d:sonar.login=${SONAR_TOKEN}
