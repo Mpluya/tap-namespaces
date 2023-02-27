@@ -68,6 +68,6 @@ spec:
         fi
         
         dotnet sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=${SONAR_TOKEN} /d:sonar.qualitygate.wait=$(params.wait-on-sonar-analysis) /d:sonar.cs.opencover.reportsPaths=coverage.xml
-        dotnet build
-        dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="./../coverage.xml"
+        dotnet build *.sln
+        dotnet test *.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:MergeWith='coverage.xml'
         dotnet sonarscanner end /d:sonar.login=${SONAR_TOKEN}
