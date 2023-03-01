@@ -4,10 +4,10 @@
 ---
 
 #@ def namespaces():
-- justin
-- mae
-- aiden
-- travis
+- ["justin", "java"]
+- ["mae", "dotnet"]
+- ["aiden", "java"]
+- ["travis", "java"]
 #@ end
 
 ---
@@ -23,14 +23,16 @@ metadata:
 ---
 
 #@ for val in namespaces():
---- #@ namespace(val)
+--- #@ namespace(val[0])
 #@ end
 
 ---
 #@ def config():
 namespaces:
 #@ for val in namespaces():
-- name: #@ val
+- name: #@ val[0]
+  language: #@ val[1]
+  scanpolicy: lax-scan-policy
 #@ end
 #@ end
 ---
@@ -44,4 +46,8 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     namespace-provisioner.apps.tanzu.vmware.com/no-overwrite: "" #! This annotation tells the provisioner app to not override this configMap as this is your desired state.
 data:
-  namespaces.yaml: #@ '#@data/values' + "\n---\n" + yaml.encode(config())
+  #@yaml/text-templated-strings
+  namespaces.yaml: |
+    #@data/values
+    ---
+    (@= yaml.encode(config()) @)
