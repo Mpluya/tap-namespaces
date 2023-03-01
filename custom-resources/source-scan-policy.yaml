@@ -25,104 +25,104 @@ spec:
     #   "cve": "CVE-2016-1000027",
     #   "rationale": "The hello application source has been reviewed and code paths analyzed.  Spring team does not intend to change this and disputes its rating.  Security team has agreed to ignore. https://nvd.nist.gov/vuln/detail/CVE-2016-1000027",
     #   "subjectiveRiskLevel": "Low",
-    #   "expiration": "2023-Feb-28"
+    #   "expiration": "2022-Feb-28"
     # }
     acceptableRiskCves := [
       {
         "cve": "CVE-2016-0949",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2017-11291",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2018-12804",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2018-12805",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2018-4923",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2021-40719",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2016-0948",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2016-4118",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2017-3101",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2018-4994",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2020-5674",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2021-21085",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2017-18589",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2006-5318",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "CVE-2014-9488",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       },
       {
         "cve": "GHSA-hrpp-h998-j3pp",
         "rationale": "I don't know how to fix and this is a demo app.",
         "subjectiveRiskLevel": "Unknown",
-        "expiration": "2023-Feb-28"
+        "expiration": "2022-Feb-28"
       }
     ]
 
