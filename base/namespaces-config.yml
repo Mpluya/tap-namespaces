@@ -5,9 +5,13 @@
 
 #@ def namespaces():
 - justin
+  language: python
 - mae
+  language: java
 - aiden
+  language: java
 - travis
+  language: java
 #@ end
 
 ---
