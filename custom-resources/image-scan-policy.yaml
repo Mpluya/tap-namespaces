@@ -31,7 +31,43 @@ spec:
         "cve": "CVE-2021-43877",
         "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
         "subjectiveRiskLevel": "High",
-        "expiration": "2023-Mar-01"
+        "expiration": "2023-Mar-31"
+      },
+      {
+        "cve": "GHSA-8f7f-vqg5-jrv9",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do. This is a Demo microservice.",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Mar-31"
+      },
+      {
+        "cve": "GHSA-7jgj-8wvc-jh57",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do. This is a Demo microservice.",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Mar-31"
+      },
+      {
+        "cve": "GHSA-5f2m-466j-3848",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do. This is a Demo microservice.",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Mar-31"
+      },
+      {
+        "cve": "GHSA-xhfc-gr8f-ffwc",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do. This is a Demo microservice.",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Mar-31"
+      },
+      {
+        "cve": "GHSA-cmhx-cq75-c4mj",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do. This is a Demo microservice.",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Mar-31"
+      },
+      {
+        "cve": "CVE-2023-0286",
+        "rationale": "Demo app. Additional research needed - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0286",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Mar-31"
       }
     ]
 
