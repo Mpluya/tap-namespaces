@@ -29,7 +29,7 @@ spec:
     # }
     acceptableRiskCves := [
       {
-        "cve": "GHSA-cmhx-cq75-c4mj ",
+        "cve": "GHSA-cmhx-cq75-c4mj",
         "rationale": "Unexploitable from how this app is used.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
         "subjectiveRiskLevel": "High",
         "expiration": "2023-Mar-1"
