@@ -1,5 +1,8 @@
 #@ load("@ytt:data", "data")
-#@ if/end hasattr(data.values, "language") and data.values.language == "python":
+#@ def in_list(key, list):
+#@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
+#@ end
+#@ if/end in_list('languages', ['python']):
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline

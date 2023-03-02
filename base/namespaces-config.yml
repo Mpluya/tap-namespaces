@@ -4,10 +4,10 @@
 ---
 
 #@ def namespaces():
-- ["justin", "java"]
-- ["mae", "dotnet"]
-- ["aiden", "java"]
-- ["travis", "python"]
+- ["justin", ["java"]]
+- ["mae", ["dotnet"]]
+- ["aiden", ["java"]]
+- ["travis", ["angular","python"]]
 #@ end
 
 ---
@@ -31,7 +31,7 @@ metadata:
 namespaces:
 #@ for val in namespaces():
 - name: #@ val[0]
-  language: #@ val[1]
+  languages: #@ val[1]
   scanpolicy: lax-scan-policy
 #@ end
 #@ end
