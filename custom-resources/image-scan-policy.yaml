@@ -30,9 +30,9 @@ spec:
     acceptableRiskCves := [
       {
         "cve": "GHSA-cmhx-cq75-c4mj",
-        "rationale": "Unexploitable from how this app is used.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
+        "rationale": "Unexploitable from how this app is used.  Security team has agreed to ignore.",
         "subjectiveRiskLevel": "High",
-        "expiration": "2023-Mar-1"
+        "expiration": "2023-Feb-25"
       },
       {
         "cve": "CVE-2021-43877",
@@ -83,7 +83,7 @@ spec:
     foundInAcceptableRiskList(array, elem) = true {
       array[_].cve = elem
       curr_time := time.now_ns()
-      date_format := "2023-Mar-01"
+      date_format := "2006-Jan-02"
       expire_time := time.parse_ns(date_format, array[_].expiration)
       curr_time < expire_time
     } else = false { true }
