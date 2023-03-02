@@ -2,7 +2,6 @@ apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
 kind: ScanPolicy
 metadata:
   name: image-scan-policy
-  namespace: mae
   labels:
     app.kubernetes.io/part-of: scan-system #! This label is required to have policy visible in tap-gui, but the value can be anything
 spec:
@@ -11,7 +10,7 @@ spec:
 
     # Accepted Values: "Critical", "High", "Medium", "Low", "Negligible", "UnknownSeverity"
     notAllowedSeverities := ["Critical","High","UnknownSeverity"]
-    
+
     # List of acceptable risks.  Must specify the rationale, subjective risk level, and expiration date.  Example:
     # {
     #   "cve": "GHSA-36p3-wjmg-h94x",
@@ -28,48 +27,6 @@ spec:
     #   "expiration": "2022-Dec-31"
     # }
     acceptableRiskCves := [
-      {
-        "cve": "GHSA-cmhx-cq75-c4mj",
-        "rationale": "Unexploitable from how this app is used.  Security team has agreed to ignore.",
-        "subjectiveRiskLevel": "High",
-        "expiration": "2023-Feb-25"
-      },
-      {
-        "cve": "CVE-2021-43877",
-        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
-        "subjectiveRiskLevel": "High",
-        "expiration": "2023-Dec-31"
-      },
-      {
-        "cve": "GHSA-8f7f-vqg5-jrv9",
-        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
-        "subjectiveRiskLevel": "High",
-        "expiration": "2023-Dec-31"
-      },
-      {
-        "cve": "GHSA-7jgj-8wvc-jh57",
-        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
-        "subjectiveRiskLevel": "High",
-        "expiration": "2023-Dec-31"
-      },
-      {
-        "cve": "GHSA-5f2m-466j-3848",
-        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
-        "subjectiveRiskLevel": "High",
-        "expiration": "2023-Dec-31"
-      },
-      {
-        "cve": "GHSA-xhfc-gr8f-ffwc",
-        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
-        "subjectiveRiskLevel": "High",
-        "expiration": "2023-Dec-31"
-      },
-      {
-        "cve": "CVE-2023-0286",
-        "rationale": "OpenSSL has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
-        "subjectiveRiskLevel": "High",
-        "expiration": "2023-Dec-31"
-      },
     ]
 
     contains(arr1, elem) = true {
