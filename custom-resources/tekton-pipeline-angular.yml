@@ -1,10 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ def in_list(key, list):
-#@  return hasattr(data.values, key) and (data.values[key] in list)
-#@ end
-#@ if/end in_list('languages', ['angular']):
----
-
+#@ if/end hasattr(data.values, "languages") and data.values.languages in "angular":
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
