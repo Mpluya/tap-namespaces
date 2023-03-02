@@ -31,7 +31,7 @@ spec:
         "cve": "CVE-2021-43877",
         "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
         "subjectiveRiskLevel": "High",
-        "expiration": "2022-Mar-04"
+        "expiration": "2023-Mar-01"
       }
     ]
 
