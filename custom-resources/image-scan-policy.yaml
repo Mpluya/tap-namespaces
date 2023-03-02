@@ -27,6 +27,12 @@ spec:
     #   "expiration": "2022-Dec-31"
     # }
     acceptableRiskCves := [
+      {
+        "cve": "CVE-2021-43877",
+        "rationale": "Microsoft has not released as fix since reported.  Nothing we can do.  Security team has agreed to ignore. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43877",
+        "subjectiveRiskLevel": "High",
+        "expiration": "2023-Mar-04"
+      }
     ]
 
     contains(arr1, elem) = true {
