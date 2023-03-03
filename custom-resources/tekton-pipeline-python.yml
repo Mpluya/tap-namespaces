@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ if/end hasattr(data.values, "language") and data.values.language == "python":
+#@ if/end hasattr(data.values, "language") and 'python' in data.values.languages:
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
