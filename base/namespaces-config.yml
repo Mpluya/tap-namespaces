@@ -4,10 +4,10 @@
 ---
 
 #@ def namespaces():
-- ["justin", ["java"]]
-- ["mae", ["dotnet", "java"]]
-- ["aiden", ["java"]]
-- ["travis", ["python", "golang"]]
+- ["justin",  ["java"],             ["lax-scan-policy"]]
+- ["mae",     ["dotnet", "java"],   ["lax-scan-policy"]]
+- ["aiden",   ["java"],             ["source-scan-policy", "image-scan-policy"]]
+- ["travis",  ["python", "golang"], ["source-scan-policy", "image-scan-policy"]]
 #@ end
 
 ---
@@ -32,7 +32,7 @@ namespaces:
 #@ for val in namespaces():
 - name: #@ val[0]
   languages: #@ val[1]
-  scanpolicy: lax-scan-policy
+  scanpolicies: #@ val[2]
 #@ end
 #@ end
 ---
