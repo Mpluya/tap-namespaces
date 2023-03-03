@@ -5,7 +5,7 @@
 
 #@ def namespaces():
 - ["justin", ["java"]]
-- ["mae", ["dotnet"]]
+- ["mae", ["dotnet", "java"]]
 - ["aiden", ["java"]]
 - ["travis", ["python", "golang"]]
 #@ end
