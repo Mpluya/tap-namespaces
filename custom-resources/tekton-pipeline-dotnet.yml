@@ -1,7 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ def in_list(key, list):
-#@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
-#@ end
+#@ if/end hasattr(data.values, "languages") and 'dotnet' in data.values.languages:
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline

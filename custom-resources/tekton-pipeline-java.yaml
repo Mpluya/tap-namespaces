@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+#@ if/end hasattr(data.values, "languages") and 'java' in data.values.languages:
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
