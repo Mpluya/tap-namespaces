@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ if/end hasattr(data.values, "languages") and 'node' in data.values.languages:
+#@ if/end in_list('supply_chain', ['testing', 'testing_scanning']) and in_list('profile', ['full', 'iterate', 'build']) and hasattr(data.values, "languages") and 'node' in data.values.languages:
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline

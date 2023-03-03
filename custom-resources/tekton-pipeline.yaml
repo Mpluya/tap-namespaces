@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ if/end in_list('supply_chain', ['testing', 'testing_scanning']) and in_list('profile', ['full', 'iterate', 'build'])
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
