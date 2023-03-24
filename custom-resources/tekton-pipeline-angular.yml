@@ -8,7 +8,6 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: developer-defined-tekton-pipeline-angular
-  namespace: #@ data.values.name
   labels:
     apps.tanzu.vmware.com/pipeline: test
     apps.tanzu.vmware.com/language: angular
