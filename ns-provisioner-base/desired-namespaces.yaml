@@ -5,9 +5,13 @@ namespaces:
 #! for a namespace will be available under data.values for templating additional sources
 - name: dev
   scanpolicies: ["lax-scan-policy"]
+  pipelines: ["java"]
 - name: dev2
   scanpolicies: ["lax-scan-policy"]
+  pipelines: ["java"]
 - name: mae
   scanpolicies: ["source-scan-policy", "image-scan-policy"]
+  pipelines: ["python", "golang"]
 - name: jeremy
   scanpolicies: ["source-scan-policy", "image-scan-policy"]
+  pipelines: ["dotnet", "java"]
