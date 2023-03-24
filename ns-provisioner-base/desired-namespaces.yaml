@@ -4,10 +4,10 @@ namespaces:
 #! The only required parameter is the name of the namespace. All additional values provided here 
 #! for a namespace will be available under data.values for templating additional sources
 - name: dev
-  scanpolicy: ["lax-scan-policy"]
+  scanpolicies: ["lax-scan-policy"]
 - name: dev2
-  scanpolicy: ["lax-scan-policy"]
+  scanpolicies: ["lax-scan-policy"]
 - name: mae
-  scanpolicy: ["source-scan-policy", "image-scan-policy"]
+  scanpolicies: ["source-scan-policy", "image-scan-policy"]
 - name: jeremy
-  scanpolicy: ["source-scan-policy", "image-scan-policy"]
+  scanpolicies: ["source-scan-policy", "image-scan-policy"]
