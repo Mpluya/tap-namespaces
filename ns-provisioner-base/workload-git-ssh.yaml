@@ -3,12 +3,9 @@ kind: ExternalSecret
 metadata:
   name: workload-git-ssh
   namespace: tap-install
-  annotations:
-    kapp.k14s.io/change-group: eso/tenants
-    kapp.k14s.io/change-rule.0: "upsert after upserting eso/tenantsecretstore"
 spec:
   secretStoreRef:
-    name: tenant-install-secrets
+    name: tap-install-secrets
     kind: SecretStore
   refreshInterval: "0m"
   target:
