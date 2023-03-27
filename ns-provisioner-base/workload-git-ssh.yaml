@@ -11,6 +11,7 @@ spec:
   target:
     name: workload-git-ssh
     template:
+      type: Opaque
       metadata:
         annotations: 
           tekton.dev/git-0: github.com
