@@ -11,19 +11,12 @@ spec:
   target:
     name: workload-git-ssh
     template:
-      type: kubernetes.io/ssh-auth
       metadata:
         annotations: 
           tekton.dev/git-0: github.com
-      data:
-        identity: "{{ .private_key | b64dec }}"
-        known_hosts: "{{ .known_hosts | b64dec }}"
+      stringData:
         ssh-privatekey: "{{ .private_key | b64dec }}"
   data:
-  - secretKey: known_hosts
-    remoteRef:
-      key: dev/tap-build/tap/tenant-install-secrets
-      property: known_hosts
   - secretKey: private_key
     remoteRef:
       key: dev/tap-build/tap/tenant-install-secrets
