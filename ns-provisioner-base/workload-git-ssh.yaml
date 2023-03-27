@@ -1,0 +1,33 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: workload-git-ssh
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/change-group: eso/tenants
+    kapp.k14s.io/change-rule.0: "upsert after upserting eso/tenantsecretstore"
+spec:
+  secretStoreRef:
+    name: tenant-install-secrets
+    kind: SecretStore
+  refreshInterval: "0m"
+  target:
+    name: workload-git-ssh
+    template:
+      type: kubernetes.io/ssh-auth
+      metadata:
+        annotations: 
+          tekton.dev/git-0: github.com
+      data:
+        identity: "{{ .private_key | b64dec }}"
+        known_hosts: "{{ .known_hosts | b64dec }}"
+        ssh-privatekey: "{{ .private_key | b64dec }}"
+  data:
+  - secretKey: known_hosts
+    remoteRef:
+      key: dev/tap-build/tap/tenant-install-secrets
+      property: known_hosts
+  - secretKey: private_key
+    remoteRef:
+      key: dev/tap-build/tap/tenant-install-secrets
+      property: private_key
