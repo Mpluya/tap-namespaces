@@ -7,10 +7,10 @@ namespaces:
   scanpolicies: ["lax-scan-policy"]
   pipelines: ["java"]
 - name: dev2
-  scanpolicies: ["lax-scan-policy"]
+  scanpolicies: ["source-scan-policy", "image-scan-policy"]
   pipelines: ["java"]
 - name: mae
-  scanpolicies: ["source-scan-policy", "image-scan-policy"]
+  scanpolicies: ["lax-scan-policy"]
   pipelines: ["java", "node"]
 - name: jeremy
   scanpolicies: ["source-scan-policy", "image-scan-policy"]
