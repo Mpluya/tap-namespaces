@@ -9,7 +9,8 @@ kind: Pipeline
 metadata:
   name: developer-defined-tekton-pipeline-node
   labels:
-    apps.tanzu.vmware.com/pipeline: test-node     #! (!) required
+    apps.tanzu.vmware.com/pipeline: "test"
+    apps.tanzu.vmware.com/language: "node"  #! (!) required
 spec:
   params:
     - name: source-url                       #! (!) required

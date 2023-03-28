@@ -11,7 +11,7 @@ namespaces:
   pipelines: ["java"]
 - name: mae
   scanpolicies: ["source-scan-policy", "image-scan-policy"]
-  pipelines: ["python", "node"]
+  pipelines: ["java", "node"]
 - name: jeremy
   scanpolicies: ["source-scan-policy", "image-scan-policy"]
   pipelines: ["dotnet", "java"]
