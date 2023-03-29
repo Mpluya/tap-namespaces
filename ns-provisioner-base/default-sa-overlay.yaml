@@ -16,3 +16,5 @@ stringData:
     imagePullSecrets:
       #@overlay/append
       - name: registry-credentials
+      #@overlay/remove
+      - name: registries-credentials
