@@ -12,7 +12,6 @@ spec:
     - name: source-revision
   workspaces:
     - name: supplychain-workspace
-      emptyDir: {}
   tasks:
     - name: unpack-source
       params:
