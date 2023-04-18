@@ -1,0 +1,47 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: linter-pipeline
+  labels:
+    apps.tanzu.vmware.com/pipeline: lint
+spec:
+  params:
+    - name: source-url
+    - name: source-revision
+  workspaces:
+    - name: supplychain-workspace
+      emptyDir: {}
+  tasks:
+    - name: unpack-source
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      workspaces:
+      - name: supplychain-workspace
+        workspace: supplychain-workspace
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        steps:
+          - name: test
+            image: bellsoft/liberica-openjdk-alpine:11
+            script: |-
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m          
+    - name: lint
+      taskRef:
+        name: markdown-lint
+        kind: ClusterTask
+      runAfter:
+        - unpack-source
+      workspaces:
+        - name: supplychain-workspace
+          workspace: supplychain-workspace
+      params:
+        - name: args
+          value: ["."]
