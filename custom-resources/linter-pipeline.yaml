@@ -31,7 +31,9 @@ spec:
         steps:
           - name: test
             image: bellsoft/liberica-openjdk-alpine:11
+            workingDir: $(workspaces.supplychain-workspace.path)
             script: |-
+              cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
     - name: lint
       taskRef:
