@@ -31,7 +31,7 @@ spec:
             image: bellsoft/liberica-openjdk-alpine:11
             script: |-
               cd `mktemp -d`
-              wget -qO- $(params.source-url) | tar xvz -m          
+              wget -qO- $(params.source-url) | tar xvz -m
     - name: lint
       taskRef:
         name: yaml-lint
