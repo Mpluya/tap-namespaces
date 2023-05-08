@@ -26,6 +26,8 @@ spec:
         params:
           - name: source-url
           - name: source-revision
+        workspaces:
+        - name: output
         steps:
           - name: test
             image: bellsoft/liberica-openjdk-alpine:11
