@@ -34,7 +34,7 @@ spec:
               wget -qO- $(params.source-url) | tar xvz -m          
     - name: lint
       taskRef:
-        name: markdown-lint
+        name: yaml-lint
         kind: ClusterTask
       runAfter:
         - unpack-source
