@@ -20,7 +20,7 @@ spec:
         - name: source-revision
           value: $(params.source-revision)
       workspaces:
-      - name: supplychain-workspace
+      - name: output
         workspace: supplychain-workspace
       taskSpec:
         params:
