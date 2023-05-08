@@ -35,6 +35,7 @@ spec:
             script: |-
               cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
+              ls -al
     - name: lint
       taskRef:
         name: yaml-lint
