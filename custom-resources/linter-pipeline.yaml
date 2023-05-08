@@ -20,14 +20,14 @@ spec:
         - name: source-revision
           value: $(params.source-revision)
       workspaces:
-      - name: output
+      - name: supplychain-workspace
         workspace: supplychain-workspace
       taskSpec:
         params:
           - name: source-url
           - name: source-revision
         workspaces:
-        - name: output
+        - name: supplychain-workspace
         steps:
           - name: test
             image: bellsoft/liberica-openjdk-alpine:11
