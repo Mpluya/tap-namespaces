@@ -10,6 +10,7 @@ spec:
   params:
     - name: source-url
     - name: source-revision
+    - name: args
   workspaces:
     - name: supplychain-workspace
   tasks:
