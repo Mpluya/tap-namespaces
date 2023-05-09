@@ -37,12 +37,12 @@ spec:
               wget -qO- $(params.source-url) | tar xvz -m
               ls -al
     - name: lint
-      workspaces:
-        - name: supplychain-workspace
-          workspace: supplychain-workspace
       params:
         - name: args
           value: ["."]
+      workspaces:
+      - name: supplychain-workspace
+        workspace: supplychain-workspace
       taskSpec:
         params:
           - name: args
