@@ -11,7 +11,6 @@ spec:
     - name: source-url
     - name: source-revision
     - name: args
-      type: array
   workspaces:
     - name: supplychain-workspace
   tasks:
