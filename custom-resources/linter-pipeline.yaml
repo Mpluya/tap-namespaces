@@ -11,6 +11,7 @@ spec:
     - name: source-url
     - name: source-revision
     - name: args
+      type: array
   workspaces:
     - name: supplychain-workspace
   tasks:
@@ -46,6 +47,7 @@ spec:
       taskSpec:
         params:
           - name: args
+            type: array
         workspaces:
         - name: supplychain-workspace
         steps:
