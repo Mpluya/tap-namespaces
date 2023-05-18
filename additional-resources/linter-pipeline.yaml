@@ -1,0 +1,61 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: linter-pipeline
+  labels:
+    apps.tanzu.vmware.com/pipeline: lint
+spec:
+  params:
+    - name: source-url
+    - name: source-revision
+    - name: args
+      type: array
+  workspaces:
+    - name: supplychain-workspace
+  tasks:
+    - name: unpack-source
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      workspaces:
+      - name: supplychain-workspace
+        workspace: supplychain-workspace
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        workspaces:
+        - name: supplychain-workspace
+        steps:
+          - name: test
+            image: bellsoft/liberica-openjdk-alpine:11
+            workingDir: $(workspaces.supplychain-workspace.path)
+            script: |-
+              wget -qO- $(params.source-url) | tar xvz -m
+              ls -al
+    - name: lint
+      params:
+        - name: args
+          value: ["."]
+      workspaces:
+      - name: supplychain-workspace
+        workspace: supplychain-workspace
+      taskSpec:
+        params:
+          - name: args
+            type: array
+        workspaces:
+        - name: supplychain-workspace
+        steps:
+          - name: lint
+            image: docker.io/cytopia/yamllint:1.23@sha256:e9deea51bbdc35950cacf6594dab94100d9bbf5c987540b8874167d58e6bdce2
+            workingDir: $(workspaces.supplychain-workspace.path)
+            command:
+              - yamllint
+            args:
+              - -d relaxed 
+              - $(params.args)

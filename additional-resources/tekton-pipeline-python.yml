@@ -1,0 +1,43 @@
+#@ load("@ytt:data", "data")
+#@ def in_list(key, list):
+#@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
+#@ end
+#@ if/end in_list('supply_chain', ['testing', 'testing_scanning']) and in_list('profile', ['full', 'iterate', 'build']) and hasattr(data.values, "pipelines") and 'python' in data.values.pipelines:
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: developer-defined-tekton-pipeline-python
+  labels:
+    apps.tanzu.vmware.com/pipeline: "test"
+    apps.tanzu.vmware.com/language: "python"
+spec:
+  params:
+  - name: source-url
+  - name: source-revision
+  workspaces:
+  - name: supplychain-workspace
+  tasks:
+  - name: test
+    params:
+    - name: source-url
+      value: $(params.source-url)
+    - name: source-revision
+      value: $(params.source-revision)
+    workspaces:
+    - name: supplychain-workspace
+      workspace: supplychain-workspace
+    taskSpec:
+      params:
+      - name: source-url
+      - name: source-revision
+      workspaces:
+      - name: supplychain-workspace
+      steps:
+        - name: test
+          image: python:latest
+          script: |-
+            set -ex
+            cd `mktemp -d`
+            wget -qO- $(params.source-url) | tar xvz -m
+            pytest
