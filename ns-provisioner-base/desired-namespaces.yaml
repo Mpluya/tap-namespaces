@@ -14,4 +14,4 @@ namespaces:
   pipelines: ["java", "node"]
 - name: jeremy
   scanpolicies: ["source-scan-policy", "image-scan-policy"]
-  pipelines: ["dotnet", "java"]
+  pipelines: ["dotnet", "java", "java-17"]
