@@ -13,5 +13,5 @@ namespaces:
   scanpolicies: ["lax-scan-policy"]
   pipelines: ["java", "node"]
 - name: jeremy
-  scanpolicies: ["source-scan-policy", "image-scan-policy"]
+  scanpolicies: ["lax-scan-policy", "image-scan-policy"]
   pipelines: ["dotnet", "java", "java-17"]
