@@ -42,12 +42,6 @@ namespaces:
     - mlarge@vmware.com
     groups:
     - the-jeremy-group
-  editorrole:
-    users:
-    - mrrabayata@vmware.com
-    - jeffa2@vmware.com
-    groups:
-    - the-mister-rabayata-group
 - name: jeremy
   scanpolicies: ["lax-scan-policy", "image-scan-policy"]
   pipelines: ["dotnet", "java", "java-17"]
@@ -58,8 +52,5 @@ namespaces:
     groups:
     - the-jeremy-group
   editorrole:
-    users:
-    - mrrabayata@vmware.com
-    - jeffa2@vmware.com
     groups:
     - the-mister-rabayata-group
