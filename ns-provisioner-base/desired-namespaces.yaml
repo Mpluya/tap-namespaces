@@ -37,9 +37,6 @@ namespaces:
   scanpolicies: ["lax-scan-policy"]
   pipelines: ["java", "node"]
   viewerrole:
-    users:
-    - castleje@vmware.com
-    - mlarge@vmware.com
     groups:
     - the-jeremy-group
 - name: jeremy
@@ -49,8 +46,6 @@ namespaces:
     users:
     - castleje@vmware.com
     - mlarge@vmware.com
-    groups:
-    - the-jeremy-group
   editorrole:
     groups:
     - the-mister-rabayata-group
