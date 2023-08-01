@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-viewer-role-binding
+  namespace: jeremy
+subjects:
+- kind: User
+  name: mrrabayata@vmware.com
+  apiGroup: rbac.authorization.k8s.io
+- kind: User
+  name: jeffa2@vmware.com
+  apiGroup: rbac.authorization.k8s.io
+- kind: Group
+  name: the-mister-rabayata-group
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: app-viewer
+  apiGroup: rbac.authorization.k8s.io
