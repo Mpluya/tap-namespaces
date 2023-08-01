@@ -9,12 +9,12 @@ kind: RoleBinding
 metadata:
   name: app-viewer-role-binding
 subjects:
-#@ for user in viewerrole.users:
+#@ for user in data.values.viewerrole.users:
 - kind: User
   name: #@ user
   apiGroup: rbac.authorization.k8s.io
 #@ end
-#@ for group in viewerrole.groups:
+#@ for group in data.values.viewerrole.groups:
 - kind: Group
   name: #@ group
   apiGroup: rbac.authorization.k8s.io
