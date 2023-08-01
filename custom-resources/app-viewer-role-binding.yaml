@@ -9,15 +9,16 @@ kind: RoleBinding
 metadata:
   name: app-viewer-role-binding
 subjects:
+#@ for user in viewerrole.users:
 - kind: User
-  name: mrrabayata@vmware.com
+  name: #@ user
   apiGroup: rbac.authorization.k8s.io
-- kind: User
-  name: jeffa2@vmware.com
-  apiGroup: rbac.authorization.k8s.io
+#@ end
+#@ for group in viewerrole.groups:
 - kind: Group
-  name: the-mister-rabayata-group
+  name: #@ group
   apiGroup: rbac.authorization.k8s.io
+#@ end
 roleRef:
   kind: ClusterRole
   name: app-viewer
