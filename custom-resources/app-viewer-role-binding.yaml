@@ -2,18 +2,20 @@
 #@ def in_list(key, list):
 #@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
 #@ end
-#@ if/end in_list('profile', ['full', 'iterate', 'build', 'run']):
+#@ if/end in_list('profile', ['full', 'iterate', 'build', 'run']) and hasattr(data.values, "viewerrole") :
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: app-viewer-role-binding
 subjects:
+#@ if/end hasattr(data.values.viewerrole, "users"):
 #@ for user in data.values.viewerrole.users:
 - kind: User
   name: #@ user
   apiGroup: rbac.authorization.k8s.io
 #@ end
+#@ if/end hasattr(data.values.viewerrole, "groups"):
 #@ for group in data.values.viewerrole.groups:
 - kind: Group
   name: #@ group
