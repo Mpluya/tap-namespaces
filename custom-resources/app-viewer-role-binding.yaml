@@ -1,9 +1,3 @@
-#@ load("@ytt:data", "data")
-#@ def in_list(key, list):
-#@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
-#@ end
-#@ if/end in_list('profile', ['full', 'iterate', 'build', 'run']) and hasattr(data.values, "pipelines") and 'angular' in data.values.pipelines:
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
