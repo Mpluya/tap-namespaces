@@ -9,17 +9,19 @@ kind: RoleBinding
 metadata:
   name: app-viewer-role-binding
 subjects:
-#@ if/end hasattr(data.values.viewerrole, "users"):
+#@ if hasattr(data.values.viewerrole, "users"):
 #@ for user in data.values.viewerrole.users:
 - kind: User
   name: #@ user
   apiGroup: rbac.authorization.k8s.io
 #@ end
-#@ if/end hasattr(data.values.viewerrole, "groups"):
+#@ end
+#@ if hasattr(data.values.viewerrole, "groups"):
 #@ for group in data.values.viewerrole.groups:
 - kind: Group
   name: #@ group
   apiGroup: rbac.authorization.k8s.io
+#@ end
 #@ end
 roleRef:
   kind: ClusterRole
