@@ -6,7 +6,6 @@ namespaces:
 - name: dev
   scanpolicies: ["lax-scan-policy"]
   pipelines: ["java"]
-  viewerrole:
   editorrole:
     users:
     - mrrabayata@vmware.com
