@@ -6,12 +6,41 @@ namespaces:
 - name: dev
   scanpolicies: ["lax-scan-policy"]
   pipelines: ["java"]
+  editorrole:
+    users:
+    - mrrabayata@vmware.com
+    - jeffa2@vmware.com
+    groups:
+    - the-mister-rabayata-group
 - name: dev2
   scanpolicies: ["source-scan-policy", "image-scan-policy"]
   pipelines: ["java"]
+  viewerrole:
+    users:
+    - castleje@vmware.com
+    - mlarge@vmware.com
+    groups:
+    - the-jeremy-group
+  editorrole:
+    users:
+    - mrrabayata@vmware.com
+    - jeffa2@vmware.com
+    groups:
+    - the-mister-rabayata-group
 - name: mae
   scanpolicies: ["lax-scan-policy"]
   pipelines: ["java", "node"]
+  viewerrole:
+    groups:
+    - the-jeremy-group
 - name: jeremy
   scanpolicies: ["lax-scan-policy", "image-scan-policy"]
   pipelines: ["dotnet", "java", "java-17"]
+  viewerrole:
+    users:
+    - castleje@vmware.com
+    - mlarge@vmware.com
+    - uaaron@vmware.com
+  editorrole:
+    groups:
+    - the-mister-rabayata-group
