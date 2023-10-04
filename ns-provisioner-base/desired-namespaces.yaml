@@ -13,7 +13,7 @@ namespaces:
     groups:
     - the-mister-rabayata-group
 - name: dev2
-  scanpolicies: ["source-scan-policy", "image-scan-policy"]
+  scanpolicies: ["source-scan-policy", "image-scan-policy", "lax-scan-policy"]
   pipelines: ["java"]
   viewerrole:
     users:
