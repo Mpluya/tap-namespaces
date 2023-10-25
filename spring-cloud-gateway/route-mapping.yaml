@@ -1,0 +1,20 @@
+---
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayRouteConfig
+metadata:
+  name: my-gateway-routes
+spec:
+  routes:
+    - uri: https://httpbingo.org
+      predicates:
+        - Path=/httpbingo/**
+---
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayMapping
+metadata:
+  name: test-gateway-mapping
+spec:
+  gatewayRef:
+    name: api-gateway
+  routeConfigRef:
+    name: my-gateway-routes
