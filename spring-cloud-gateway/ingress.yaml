@@ -2,10 +2,9 @@ apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
   name: scg-ingress
-  namespace: jeremy
 spec:
   virtualhost:
-    fqdn: jeremy-gateway.run.prep.tapsme.org
+    fqdn: gateway.run.prep.tapsme.org
     tls:
       secretName: scg-ingress-cert
   routes:
@@ -17,7 +16,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: scg-ingress-cert
-  namespace: jeremy
 spec:
   subject:
     countries:
@@ -33,7 +31,7 @@ spec:
   secretName: scg-ingress-cert
   isCA: false
   dnsNames:
-  - jeremy-gateway.run.prep.tapsme.org
+  - gateway.run.prep.tapsme.org
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
