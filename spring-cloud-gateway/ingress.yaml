@@ -1,10 +1,12 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
   name: scg-ingress
 spec:
   virtualhost:
-    fqdn: gateway.run.prep.tapsme.org
+    fqdn: #@ data.values.name + gateway.run.prep.tapsme.org
     tls:
       secretName: scg-ingress-cert
   routes:
@@ -31,7 +33,7 @@ spec:
   secretName: scg-ingress-cert
   isCA: false
   dnsNames:
-  - gateway.run.prep.tapsme.org
+  - #@ data.values.name + gateway.run.prep.tapsme.org
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
