@@ -6,7 +6,7 @@ metadata:
   name: scg-ingress
 spec:
   virtualhost:
-    fqdn: #@ data.values.name + gateway.run.prep.tapsme.org
+    fqdn: #@ data.values.name + "-gateway.run.prep.tapsme.org"
     tls:
       secretName: scg-ingress-cert
   routes:
@@ -33,7 +33,7 @@ spec:
   secretName: scg-ingress-cert
   isCA: false
   dnsNames:
-  - #@ data.values.name + gateway.run.prep.tapsme.org
+  - #@ data.values.name + "-gateway.run.prep.tapsme.org"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
