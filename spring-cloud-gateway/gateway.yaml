@@ -3,4 +3,4 @@ kind: SpringCloudGateway
 metadata:
   name: api-gateway
 spec:
-  count: 1
+  count: 2
