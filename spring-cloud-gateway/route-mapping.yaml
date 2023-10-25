@@ -7,7 +7,7 @@ spec:
   routes:
     - uri: https://httpbingo.org
       predicates:
-        - Path=/httpbingo/**
+        - Path=/poo/**
 ---
 apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGatewayMapping
