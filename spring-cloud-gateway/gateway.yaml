@@ -14,3 +14,15 @@ spec:
     metrics:
       prometheus:
         enabled: true
+  serviceAccount:
+    name: gateway-sa
+  extensions:
+    secretsProviders:
+      - name: vault-api-keys
+        vault:
+          roleName: gateway-role
+          path: api-portal-for-vmware-tanzu
+    filters:
+      apiKey:
+        enabled: true
+        secretsProviderName: vault-api-keys
