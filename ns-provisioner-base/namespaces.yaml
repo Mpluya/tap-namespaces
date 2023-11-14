@@ -8,6 +8,4 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: #@ ns.name
-  labels:
-    policy.sigstore.dev/include: "true"
 #@ end
