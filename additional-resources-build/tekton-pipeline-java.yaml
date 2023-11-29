@@ -32,14 +32,10 @@ spec:
             script: |-
               cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
-              FILE="./mvnw"
-              if test -f "$FILE"; then
-                  ./mvnw verify -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=info
-              fi
-              FILE="./gradlew"
               if test -f "$FILE"; then
                   ./gradlew test
-              fi
+              else
+                ./mvn verify -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=info
             volumeMounts:
               - mountPath: /var/run/
                 name: dind-socket
