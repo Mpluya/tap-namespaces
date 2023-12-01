@@ -8,7 +8,7 @@ spec:
     - type: git
       uri: https://github.com/x95castle1/tenant-config
       searchPaths: 
-      - run-prod
+      - run
 ---
 apiVersion: config.apps.tanzu.vmware.com/v1alpha4
 kind: ConfigurationSlice
