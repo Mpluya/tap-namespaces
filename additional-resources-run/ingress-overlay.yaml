@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ingress-overlay
+stringData:
+  ingress-overlay.yaml: |
+    #@ load("@ytt:overlay", "overlay")
+    #@ load("@ytt:yaml", "yaml")
+    #@ load("@ytt:data", "data")
+    #@ def append_hostname(left):
+    #@  rule = yaml.decode(yaml.encode(left))
+    #@  x = rule[0]
+    #@  hostname = x.get("host") + data.values.domain
+    #@  x.update({"host": hostname})
+    #@  return rule
+    #@ end
+    #@overlay/match by=overlay.subset({"kind": "Ingress"},{"apiVersion": "networking.k8s.io/v1"}), expects="0+"
+    ---
+    spec:
+      #@overlay/replace via=lambda left, _: append_hostname(left)
+      rules:
