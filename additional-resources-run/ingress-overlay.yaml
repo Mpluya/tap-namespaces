@@ -11,7 +11,7 @@ stringData:
     #@ def append_hostname(left):
     #@  rule = yaml.decode(yaml.encode(left))
     #@  x = rule[0]
-    #@  hostname = x.get("host") + data.values.domain
+    #@  hostname = x.get("host") + data.values.data.domain
     #@  x.update({"host": hostname})
     #@  return rule
     #@ end
