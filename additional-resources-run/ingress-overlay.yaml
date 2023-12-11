@@ -13,7 +13,7 @@ stringData:
     #@  rules = yaml.decode(yaml.encode(left))
     #@  for rule in rules:
     #!    Safety check. If there is as a .com then assume domain is there
-    #@    if rule.get("host").find(".com") > 0:
+    #@    if rule.get("host").find(data.values.domain) > 0:
     #@      hostname = rule.get("host")
     #@    else:     
     #@      hostname = rule.get("host") + data.values.domain
