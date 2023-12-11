@@ -15,7 +15,7 @@ stringData:
     #@  x.update({"host": hostname})
     #@  return rule
     #@ end
-    #@overlay/match by=overlay.subset({"kind": "Ingress"}), expects="0+"
+    #@overlay/match by=overlay.subset({"kind": "Ingress"},{"apiVersion": "networking.k8s.io/v1"}), expects="0+"
     ---
     spec:
       #@overlay/replace via=lambda left, _: append_hostname(left)
