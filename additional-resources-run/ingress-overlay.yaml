@@ -8,15 +8,22 @@ stringData:
     #@ load("@ytt:overlay", "overlay")
     #@ load("@ytt:yaml", "yaml")
     #@ load("@ytt:data", "data")
+    
     #@ def append_hostname(left):
-    #@  rule = yaml.decode(yaml.encode(left))
-    #@  x = rule[0]
-    #@  hostname = x.get("host") + data.values.domain
-    #@  x.update({"host": hostname})
-    #@  return rule
+    #@  rules = yaml.decode(yaml.encode(left))
+    #@  for rule in rules:
+    #!    Safety check. If there is as a .com then assume domain is there
+    #@    if rule.get("host").find(".com") > 0:
+    #@      hostname = rule.get("host")
+    #@    else:     
+    #@      hostname = rule.get("host") + data.values.domain
+    #@    end 
+    #@    rule.update({"host": hostname})
+    #@  end
+    #@  return rules
     #@ end
     #@overlay/match by=overlay.subset({"kind": "Ingress","apiVersion": "networking.k8s.io/v1"}), expects="0+"
     ---
     spec:
-      #@overlay/replace via=lambda left, _: append_hostname(left)
+    #@overlay/replace via=lambda left, _: append_hostname(left)
       rules:
