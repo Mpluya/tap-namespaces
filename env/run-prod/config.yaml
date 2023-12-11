@@ -4,4 +4,4 @@ metadata:
   name: env-specific
 data: 
   config.yaml: |
-    domain: ".run.prep.tapsme.org"
+    domain: ".run-prod.prep.tapsme.org"
