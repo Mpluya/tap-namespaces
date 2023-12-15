@@ -8,22 +8,41 @@ stringData:
     #@ load("@ytt:overlay", "overlay")
     #@ load("@ytt:yaml", "yaml")
     #@ load("@ytt:data", "data")
-    
-    #@ def append_hostname(left):
+
+    #@ def append_hostname_rule(left):
     #@  rules = yaml.decode(yaml.encode(left))
     #@  for rule in rules:
-    #!    Safety check. If there is as a .com then assume domain is there
-    #@    if rule.get("host").find(".com") > 0:
-    #@      hostname = rule.get("host")
+    #!    Safety check. If there is a . then assume domain is there
+    #@    if rule.get("host").find(".") > 0:
+    #@      rule.update({"host": rule.get("host")})
     #@    else:     
-    #@      hostname = rule.get("host") + data.values.domain
+    #@      rule.update({"host": rule.get("host") + data.values.domain}) 
     #@    end 
-    #@    rule.update({"host": hostname})
     #@  end
     #@  return rules
     #@ end
+
+    #@ def append_hostname_tls(left):
+    #@  secrets = yaml.decode(yaml.encode(left))
+    #@  for secret in secrets:
+    #@    fqdnhosts = list()
+    #@    for host in secret.get("hosts"):
+    #!      Safety check. If there is a . then assume domain is there
+    #@      if host.find(".") > 0:
+    #@        fqdnhosts.append(host)
+    #@      else:     
+    #@        fqdnhosts.append(host + data.values.domain)
+    #@      end 
+    #@    end
+    #@    secret.update({"hosts": fqdnhosts})
+    #@  end
+    #@  return secrets
+    #@ end
+
     #@overlay/match by=overlay.subset({"kind": "Ingress","apiVersion": "networking.k8s.io/v1"}), expects="0+"
     ---
     spec:
-    #@overlay/replace via=lambda left, _: append_hostname(left)
+      #@overlay/replace via=lambda left, _: append_hostname_rule(left)
       rules:
+      #@overlay/replace via=lambda left, _: append_hostname_tls(left)
+      tls:
